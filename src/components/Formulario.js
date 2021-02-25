@@ -3,10 +3,19 @@ import React, { Fragment, useState } from "react";
 const Formulario = () => {
 
     // Crear State de Citas
-    const [cita, actualizarCita] = useState({})
+    const [cita, actualizarCita] = useState({
+        mascota: '',
+        propietario : '',
+        fecha : '',
+        hora : '',
+        sintomas : ''
+    })
+
+    // state Error
+    const [error, actualizarError] = useState(false)
 
     // Funcion que se ejecuta cada que el usuario escribe en un input
-    const handleChange = (e) => {
+    const handleChange = e => {
         actualizarCita({
             ...cita,
             [e.target.name]: e.target.value
@@ -22,11 +31,28 @@ const Formulario = () => {
         sintomas
     } = cita
 
+    // Cuando se envia el formulario
+    const submitCita = e => {
+        e.preventDefault()
+
+        // Validar
+        if (mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' ||
+            hora.trim() === '' || sintomas.trim() === '') {
+                return actualizarError(true)
+        }
+
+        // Asignar un Id
+    }
+
     return (
         <Fragment>
             <h1>Crear Cita</h1>
 
-            <form>
+            {error ? <p className="alerta-error">Todos los campos son obligatorios</p> : null}
+
+            <form
+                onSubmit={submitCita}
+            >
                 <label>Nombre Mascota</label>
                 <input
                     type="text"
@@ -74,7 +100,7 @@ const Formulario = () => {
                 ></textarea>
 
                 <button
-                    type="button"
+                    type="submit"
                     className="u-full-width button-primary"
                 >Agregar Cita</button>
             </form>
