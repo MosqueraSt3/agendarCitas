@@ -6,9 +6,22 @@ const Formulario = () => {
     const [cita, actualizarCita] = useState({})
 
     // Funcion que se ejecuta cada que el usuario escribe en un input
-    const handleChange = () => {
-        console.log('escribiendo');
+    const handleChange = (e) => {
+        actualizarCita({
+            ...cita,
+            [e.target.name]: e.target.value
+        })
     }
+
+    // Extraer valores
+    const {
+        mascota,
+        propietario,
+        fecha,
+        hora,
+        sintomas
+    } = cita
+
     return (
         <Fragment>
             <h1>Crear Cita</h1>
@@ -21,6 +34,7 @@ const Formulario = () => {
                     className="u-full-width"
                     placeholder="Nombre Mascota"
                     onChange={handleChange}
+                    value={mascota}
                 />
 
                 <label>Nombre Dueño</label>
@@ -30,6 +44,7 @@ const Formulario = () => {
                     className="u-full-width"
                     placeholder="Nombre Dueño de la mascota"
                     onChange={handleChange}
+                    value={propietario}
                 />
 
                 <label>Fecha</label>
@@ -38,6 +53,7 @@ const Formulario = () => {
                     name="fecha"
                     className="u-full-width"
                     onChange={handleChange}
+                    value={fecha}
                 />
 
                 <label>Hora</label>
@@ -46,6 +62,7 @@ const Formulario = () => {
                     name="hora"
                     className="u-full-width"
                     onChange={handleChange}
+                    value={hora}
                 />
 
                 <label>Descripcion</label>
@@ -53,6 +70,7 @@ const Formulario = () => {
                     className="u-full-width"
                     name="sintomas"
                     onChange={handleChange}
+                    value={sintomas}
                 ></textarea>
 
                 <button
