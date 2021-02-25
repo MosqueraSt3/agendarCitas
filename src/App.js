@@ -20,6 +20,9 @@ function App() {
     guardarCitas(nuevasCitas)
   }
 
+  // Mensaje dinamico
+  const titulo = citas.length === 0 ? 'Agenda una cita' : 'Administra tus citas'
+
   return (
     <Fragment>
       <h1>Administrador</h1>
@@ -31,7 +34,7 @@ function App() {
             />
           </div>
           <div className="one-half column">
-            <h2>Administra tus citas</h2>
+            <h2>{titulo}</h2>
             {citas.map(cita => (
               <Cita
                 key={cita.id}
